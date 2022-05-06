@@ -8,19 +8,8 @@ class ChoiceField(serializers.ChoiceField):
         return self._choices[obj]
 
 
-# class CurrentUserDefault(serializers.CurrentUserDefault):
-#
-#     def __call__(self, serializer_field):
-#         return serializer_field.context['request'].user.id
-
-
-class TaskSerializer(serializers.ModelSerializer):
-    author = serializers.PrimaryKeyRelatedField(
-        source='author.username',
-        read_only=True,
-        default=serializers.CurrentUserDefault()
-    )
-    # author = serializers.HiddenField(default=serializers.CurrentUserDefault())
+class UserTaskSerializer(serializers.ModelSerializer):
+    author = serializers.HiddenField(default=serializers.CurrentUserDefault())
     status = ChoiceField(choices=Ticket.CHOICES, read_only=True)
 
     class Meta:
@@ -33,15 +22,6 @@ class TaskSerializer(serializers.ModelSerializer):
     def save(self, **kwargs):
         kwargs['author'] = self.fields['author'].get_default()
         return super().save(**kwargs)
-
-
-class UserTaskSerializer(serializers.ModelSerializer):
-    author = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    status = ChoiceField(choices=Ticket.CHOICES, read_only=True)
-
-    class Meta:
-        model = Ticket
-        fields = '__all__'
 
 
 class SupportTaskSerializer(serializers.ModelSerializer):

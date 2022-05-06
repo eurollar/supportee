@@ -10,3 +10,6 @@ class Comment(models.Model):
     text = models.TextField()
     published = models.DateTimeField(auto_now_add=True)
     parent = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True)
+
+    def __str__(self):
+        return self.text
