@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from tickets.models import Ticket
 from tickets.permissions import IsClientOrReadOnly, IsSupportOrReadOnly
-from tickets.serializers import SupportTaskSerializer, UserTaskSerializer
+from tickets.serializers import UserTicketList, UserTicketDetail, SupportTicketDetail, SupportTicketList
 
 
 class TicketList(generics.ListCreateAPIView):
@@ -15,8 +15,8 @@ class TicketList(generics.ListCreateAPIView):
 
     def get_serializer_class(self):
         if self.request.user.type == 'support':
-            return SupportTaskSerializer
-        return UserTaskSerializer
+            return SupportTicketList
+        return UserTicketList
 
     permission_classes = (IsAuthenticated, IsClientOrReadOnly)
 
@@ -25,8 +25,8 @@ class TicketDetail(generics.RetrieveUpdateAPIView):
 
     def get_serializer_class(self):
         if self.request.user.type == 'support':
-            return SupportTaskSerializer
-        return UserTaskSerializer
+            return SupportTicketDetail
+        return UserTicketDetail
 
     queryset = Ticket.objects.all()
     permission_classes = (IsAuthenticated, IsSupportOrReadOnly)
