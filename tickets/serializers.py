@@ -63,7 +63,7 @@ class UserTicketList(serializers.ModelSerializer):
 
 class UserTicketDetail(serializers.ModelSerializer):
     status = ChoiceField(choices=Ticket.CHOICES, read_only=True)
-    comment = CommentSerializer(many=True, read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = Ticket
@@ -91,8 +91,8 @@ class SupportTicketDetail(serializers.ModelSerializer):
         default=serializers.CurrentUserDefault()
     )
     status = ChoiceField(choices=Ticket.CHOICES)
-    comment = CommentSerializer(many=True, read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = Ticket
-        fields = ('id', 'title', 'text', 'author', 'status', 'create', 'comment')
+        fields = ('id', 'title', 'text', 'author', 'status', 'create', 'comments')

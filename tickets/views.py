@@ -9,7 +9,7 @@ from tickets.serializers import UserTicketList, UserTicketDetail, SupportTicketD
 class TicketList(generics.ListCreateAPIView):
     def get_queryset(self):
         if self.request.user.type == 'support':
-            return Ticket.objects.all()
+            return Ticket.objects.all().select_related('author')
         else:
             return Ticket.objects.filter(author_id=self.request.user.id)
 
@@ -23,10 +23,13 @@ class TicketList(generics.ListCreateAPIView):
 
 class TicketDetail(generics.RetrieveUpdateAPIView):
 
+    def get_queryset(self):
+        return Ticket.objects.filter(pk=self.kwargs['pk']).select_related('author').prefetch_related('comments__author')
+
     def get_serializer_class(self):
         if self.request.user.type == 'support':
             return SupportTicketDetail
         return UserTicketDetail
 
-    queryset = Ticket.objects.all()
+    # queryset = Ticket.objects.all().select_related('author')
     permission_classes = (IsAuthenticated, IsSupportOrReadOnly)
