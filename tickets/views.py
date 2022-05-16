@@ -1,3 +1,4 @@
+import django_filters
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
@@ -19,6 +20,8 @@ class TicketList(generics.ListCreateAPIView):
         return UserTicketList
 
     permission_classes = (IsAuthenticated, IsClientOrReadOnly)
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filter_fields = ['status']
 
 
 class TicketDetail(generics.RetrieveUpdateAPIView):

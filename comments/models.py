@@ -13,4 +13,4 @@ class Comment(models.Model):
 
     def __str__(self):
         # return str(self.pk)
-        return self.text
+        return f'Comment for "{self.ticket}" from "{self.author}"'
