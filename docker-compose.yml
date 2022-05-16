@@ -19,9 +19,26 @@ services:
  db:
   image: postgres:latest
   container_name: supportee_postgres
-  volumes:
-   - ./data/db:/var/lib/postgresql/data
   env_file:
    - db_keys.txt
   ports:
    - "5432:5432"
+
+ redis:
+  image: redis:latest
+  container_name: supportee_redis_db
+
+ celery:
+  build:
+   context: .
+   dockerfile: Dockerfile
+  container_name: supportee_celery_w
+  volumes:
+   - .:/code
+  env_file:
+   - db_keys.txt
+  depends_on:
+   - redis
+  ports:
+   - '5555:5555'
+  command: bash -c 'celery -A suptee worker -c 5 -l info -B'
