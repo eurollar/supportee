@@ -3,3 +3,4 @@ venv
 .idea
 plan
 db_keys.txt
+data
