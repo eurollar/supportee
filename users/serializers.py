@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
-
 from users.models import CustomUser
 
 
@@ -21,6 +20,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class CreateUserSerializer(UserSerializer):
+    """
+    Inherit fields "username" and "email"
+    """
     password = serializers.CharField(
         min_length=8,
         write_only=True,
@@ -42,6 +44,18 @@ class CreateUserSerializer(UserSerializer):
 
 
 class ChangePasswordSerializer(serializers.Serializer):
-    old_password = serializers.CharField(min_length=8, required=True, style={'input_type': 'password'})
-    new_password = serializers.CharField(min_length=8, required=True, style={'input_type': 'password'})
-    confirm_password = serializers.CharField(min_length=8, required=True, style={'input_type': 'password'})
+    old_password = serializers.CharField(
+        min_length=8,
+        required=True,
+        style={'input_type': 'password'}
+    )
+    new_password = serializers.CharField(
+        min_length=8,
+        required=True,
+        style={'input_type': 'password'}
+    )
+    confirm_password = serializers.CharField(
+        min_length=8,
+        required=True,
+        style={'input_type': 'password'}
+    )

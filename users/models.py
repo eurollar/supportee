@@ -3,9 +3,12 @@ from django.db import models
 
 
 class CustomUser(AbstractUser):
+    """
+    Custom user's model
+    """
     CHOICES = [
-        ('user', 'Пользователь'),
-        ('support', 'Саппорт')
+        ('user', 'Client'),
+        ('support', 'Support')
     ]
 
     type = models.CharField(max_length=15, choices=CHOICES, default='user')
