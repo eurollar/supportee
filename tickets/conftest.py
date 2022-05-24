@@ -1,11 +1,11 @@
 import os
 
-from celery import Celery
 import pytest
+from celery import Celery
+from rest_framework.test import APIClient
 
 from tickets.models import Ticket
 from users.models import CustomUser
-from rest_framework.test import APIClient
 
 
 #  Create client 1

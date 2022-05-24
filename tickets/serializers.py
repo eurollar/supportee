@@ -1,5 +1,6 @@
-from comments.serializers import CommentSerializer
 from rest_framework import serializers
+
+from comments.serializers import CommentSerializer
 from tickets.models import Ticket
 
 

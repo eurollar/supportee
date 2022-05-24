@@ -1,8 +1,9 @@
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
+
 from comments.models import Comment
 from comments.permissions import IsSupportOrAuthor
 from comments.serializers import CommentSerializer
-from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated
 
 
 class CommentsList(generics.ListCreateAPIView):
