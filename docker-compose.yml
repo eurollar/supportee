@@ -41,4 +41,4 @@ services:
    - redis
   ports:
    - '5555:5555'
-  command: bash -c 'celery -A suptee worker -c 5 -l info -B'
+  command: bash -c 'celery -A suptee worker -l info & celery -A suptee flower'

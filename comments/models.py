@@ -12,5 +12,4 @@ class Comment(models.Model):
     parent = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True, related_name='child')
 
     def __str__(self):
-        # return str(self.pk)
-        return f'Comment for "{self.ticket}" from "{self.author}"'
+        return self.text
