@@ -1,5 +1,6 @@
-from comments.models import Comment
 from rest_framework import serializers
+
+from comments.models import Comment
 
 
 class CustomForeignKey(serializers.PrimaryKeyRelatedField):

@@ -1,4 +1,5 @@
 from django.db import models
+
 from tickets.models import Ticket
 from users.models import CustomUser
 

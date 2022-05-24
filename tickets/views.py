@@ -2,6 +2,7 @@ import django_filters
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+
 from tickets.models import Ticket
 from tickets.permissions import IsClientOrReadOnly, IsSupportOrReadOnly
 from tickets.serializers import (SupportTicketDetail, SupportTicketList,
