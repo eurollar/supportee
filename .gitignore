@@ -1,4 +1,5 @@
 plan
+<<<<<<< HEAD
 data
 
 # Byte-compiled / optimized / DLL files
@@ -161,3 +162,7 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
+=======
+db_keys.txt
+data
+>>>>>>> 3b5499db0756d7a2c73eb42352a5301d4dded153
