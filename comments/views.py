@@ -12,7 +12,7 @@ class CommentsList(generics.ListCreateAPIView):
     """
     def get_queryset(self):
         return Comment.objects.filter(
-            ticket_id=self.kwargs['pk']
+            ticket_id=self.kwargs.get('pk')
         ).select_related(
             'author', 'ticket__author'
         )

@@ -9,7 +9,7 @@ class CustomForeignKey(serializers.PrimaryKeyRelatedField):
     """
     def get_queryset(self):
         return Comment.objects.filter(
-            ticket_id=self.context['request'].parser_context['kwargs']['pk']
+            ticket_id=self.context.get('request').parser_context.get('kwargs').get('pk')
         )
 
 

@@ -10,7 +10,7 @@ class IsClientOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        return bool(request.user.type == 'user')
+        return request.user.type == 'user'
 
 
 class IsSupportOrReadOnly(permissions.BasePermission):
@@ -22,6 +22,6 @@ class IsSupportOrReadOnly(permissions.BasePermission):
         support = request.user.type == 'support'
 
         if request.method in permissions.SAFE_METHODS:
-            return bool(obj.author == request.user or support)
+            return obj.author == request.user or support
 
-        return bool(support)
+        return support

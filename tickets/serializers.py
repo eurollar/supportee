@@ -26,7 +26,7 @@ class UserTicketList(serializers.ModelSerializer):
         return Ticket.objects.create(**validated_data)
 
     def save(self, **kwargs):
-        kwargs['author'] = self.fields['author'].get_default()
+        kwargs['author'] = self.fields.get('author').get_default()
         return super().save(**kwargs)
 
 

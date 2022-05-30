@@ -32,9 +32,9 @@ class CreateUserSerializer(UserSerializer):
 
     def create(self, validated_data):
         user = CustomUser.objects.create_user(
-            validated_data['username'],
-            validated_data['email'],
-            validated_data['password']
+            validated_data.get('username'),
+            validated_data.get('email'),
+            validated_data.get('password')
         )
 
         return user

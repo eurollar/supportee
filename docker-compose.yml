@@ -9,7 +9,7 @@ services:
   volumes:
    - .:/code
   env_file:
-   - db_keys.txt
+   - .env
   ports:
    - "8000:8000"
   depends_on:
@@ -20,7 +20,7 @@ services:
   image: postgres:latest
   container_name: supportee_postgres
   env_file:
-   - db_keys.txt
+   - .env
   ports:
    - "5432:5432"
 
@@ -36,7 +36,7 @@ services:
   volumes:
    - .:/code
   env_file:
-   - db_keys.txt
+   - .env
   depends_on:
    - redis
   ports:

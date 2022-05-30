@@ -34,7 +34,7 @@ class TicketDetail(generics.RetrieveUpdateAPIView):
     # Get the ticket with comments
     def get_queryset(self):
         return Ticket.objects.filter(
-            pk=self.kwargs['pk']
+            pk=self.kwargs.get('pk')
         ).select_related(
             'author'
         ).prefetch_related(
@@ -68,7 +68,7 @@ class TicketDetail(generics.RetrieveUpdateAPIView):
                 'email': instance.author.email,
                 'ticket': instance.title,
                 'current_status': current_status,
-                'new_status': request.data['status']
+                'new_status': request.data.get('status')
             }
         )
 

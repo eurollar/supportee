@@ -8,9 +8,9 @@ def test_get_list_client_1(api_client_1, test_ticket_1, test_ticket_2):
     assert response.status_code == status.HTTP_200_OK
 
     data = response.data
-    assert len(data['results']) == 2
-    assert data['results'][0]['id'] == test_ticket_1.id
-    assert data['results'][1]['id'] == test_ticket_2.id
+    assert len(data.get('results')) == 2
+    assert data.get('results')[0].get('id') == test_ticket_1.id
+    assert data.get('results')[1].get('id') == test_ticket_2.id
 
 
 #  Get list of tickets for author 2
@@ -19,8 +19,8 @@ def test_get_list_client_2(api_client_2, test_ticket_3):
     assert response.status_code == status.HTTP_200_OK
 
     data = response.data
-    assert len(data['results']) == 1
-    assert data['results'][0]['id'] == test_ticket_3.id
+    assert len(data.get('results')) == 1
+    assert data.get('results')[0].get('id') == test_ticket_3.id
 
 
 #  Get list of tickets for another client
@@ -29,7 +29,7 @@ def test_get_list_another_client(api_client_2, test_ticket_1, test_ticket_2):
     assert response.status_code == status.HTTP_200_OK
 
     data = response.data
-    assert len(data['results']) == 0
+    assert len(data.get('results')) == 0
 
 
 #  Get list of tickets for support
@@ -38,10 +38,10 @@ def test_get_list_support(api_support, test_ticket_1, test_ticket_2, test_ticket
     assert response.status_code == status.HTTP_200_OK
 
     data = response.data
-    assert len(data['results']) == 3
-    assert data['results'][0]['id'] == test_ticket_1.id
-    assert data['results'][1]['id'] == test_ticket_2.id
-    assert data['results'][2]['id'] == test_ticket_3.id
+    assert len(data.get('results')) == 3
+    assert data.get('results')[0].get('id') == test_ticket_1.id
+    assert data.get('results')[1].get('id') == test_ticket_2.id
+    assert data.get('results')[2].get('id') == test_ticket_3.id
 
 
 #  Get ticket detail for author
@@ -50,7 +50,7 @@ def test_get_detail_client_1(api_client_1, test_ticket_1):
     assert response.status_code == status.HTTP_200_OK
 
     data = response.data
-    assert data['id'] == test_ticket_1.id
+    assert data.get('id') == test_ticket_1.id
 
 
 #  Get ticket detail for another user
@@ -65,7 +65,7 @@ def test_get_detail_support(api_support, test_ticket_1):
     assert response.status_code == status.HTTP_200_OK
 
     data = response.data
-    assert data['id'] == test_ticket_1.id
+    assert data.get('id') == test_ticket_1.id
 
 
 # Create new ticket for client
@@ -78,8 +78,7 @@ def test_post_ok(api_client_1):
     assert response.status_code == status.HTTP_201_CREATED
 
     response_data = response.data
-    print(response_data)
-    assert response_data['title'] == request_data['title']
+    assert response_data.get('title') == request_data.get('title')
 
 
 #  Invalid data - missing title
